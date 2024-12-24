@@ -1,12 +1,19 @@
 {
   "name": "22",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/server.ts",
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "lint": "eslint 'src/**/*.{ts,js}'",
-    "format": "prettier --write 'src/**/*.{ts,js}'",
-    "dev": "nodemon --watch src --exec ts-node src/index.ts"
+    "start": "ts-node src/server.ts",
+    "dev": "nodemon --watch src --exec ts-node src/server.ts",
+    "lint:check": "eslint --ignore-path .eslintignore --ext .js,.ts .",
+    "lint:fix": "eslint --ignore-path .eslintignore --ext .js,.ts . --fix",
+    "prettier:check": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
+    "prettier:fix": "prettier --write .",
+    "lint-prettier:check": "yarn lint:check && yarn prettier:check",
+    "lint-prettier:fix": "yarn lint:fix && yarn prettier:fix"
+  },
+  "lint-staged": {
+    "src/**/*.ts": "yarn lint-prettier:check"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +21,10 @@
   "description": "",
   "devDependencies": {
     "@eslint/js": "^9.17.0",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/http-status": "^1.1.2",
+    "@types/morgan": "^1.9.9",
     "@types/node": "^22.10.2",
     "@typescript-eslint/eslint-plugin": "^8.18.2",
     "@typescript-eslint/parser": "^8.18.2",
@@ -21,6 +32,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "globals": "^15.14.0",
+    "husky": "^9.1.7",
     "nodemon": "^3.1.9",
     "prettier": "^3.4.2",
     "ts-node": "^10.9.2",
@@ -28,6 +40,11 @@
     "typescript-eslint": "^8.18.2"
   },
   "dependencies": {
-    "-": "^0.0.1"
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "http-status": "^2.0.0",
+    "mongoose": "^8.9.2",
+    "morgan": "^1.10.0"
   }
 }
